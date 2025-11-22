@@ -3,37 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-
-const projects = [
-  {
-    title: "Chronicle API",
-    type: "Backend Architecture",
-    year: "2024",
-    img: "https://picsum.photos/800/1200?random=1",
-    slug: "chronicle-api",
-  },
-  {
-    title: "Vogue Scandinavia",
-    type: "Frontend Experience",
-    year: "2023",
-    img: "https://picsum.photos/800/1200?random=2",
-    slug: "vogue-scandinavia",
-  },
-  {
-    title: "Lumina Health",
-    type: "Fullstack Application",
-    year: "2023",
-    img: "https://picsum.photos/800/1200?random=3",
-    slug: "lumina-health",
-  },
-  {
-    title: "Apex Finance",
-    type: "Design System",
-    year: "2022",
-    img: "https://picsum.photos/800/1200?random=4",
-    slug: "apex-finance",
-  },
-];
+import { projects } from "@/content/projects";
 
 export default function WorkTable() {
   const [activeProject, setActiveProject] = useState<number | null>(null);

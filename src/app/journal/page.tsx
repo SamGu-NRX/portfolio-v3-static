@@ -1,33 +1,7 @@
 "use client";
 import Link from "next/link";
 import { motion } from "motion/react";
-
-const posts = [
-  {
-    title: "The Ethics of Computer Vision",
-    date: "NOV 2024",
-    readTime: "5 MIN",
-    category: "AI/ML",
-  },
-  {
-    title: "Why I Chose Rust for Web",
-    date: "OCT 2024",
-    readTime: "8 MIN",
-    category: "ENGINEERING",
-  },
-  {
-    title: "Design Systems as Infrastructure",
-    date: "AUG 2024",
-    readTime: "4 MIN",
-    category: "DESIGN",
-  },
-  {
-    title: "Optimizing Docker Builds",
-    date: "JUL 2024",
-    readTime: "6 MIN",
-    category: "DEVOPS",
-  },
-];
+import { journalPosts } from "@/content/journal";
 
 export default function Journal() {
   return (
@@ -41,10 +15,10 @@ export default function Journal() {
         </div>
 
         <div className="flex flex-col">
-          {posts.map((post, index) => (
+          {journalPosts.map((post) => (
             <Link
-              key={post.title}
-              href={`/journal/${index}`}
+              key={post.slug}
+              href={`/journal/${post.slug}`}
               className="group relative border-b border-white/10 py-12 transition-colors hover:bg-white/[0.02]"
             >
               <div className="relative z-10 flex flex-col justify-between md:flex-row md:items-center">
@@ -77,4 +51,3 @@ export default function Journal() {
     </main>
   );
 }
-

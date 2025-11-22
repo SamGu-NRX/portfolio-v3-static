@@ -1,23 +1,6 @@
 "use client";
 import Link from "next/link";
-
-const posts = [
-  {
-    title: "The Ethics of Computer Vision",
-    date: "NOV 2024",
-    category: "AI/ML",
-  },
-  {
-    title: "Why I Chose Rust for Web",
-    date: "OCT 2024",
-    category: "ENGINEERING",
-  },
-  {
-    title: "Design Systems as Infrastructure",
-    date: "AUG 2024",
-    category: "DESIGN",
-  },
-];
+import { journalPosts } from "@/content/journal";
 
 export default function JournalPreview() {
   return (
@@ -32,10 +15,10 @@ export default function JournalPreview() {
 
         <div className="flex-1">
           <div className="flex flex-col">
-            {posts.map((post) => (
+            {journalPosts.slice(0, 3).map((post) => (
               <Link
-                key={post.title}
-                href="/journal"
+                key={post.slug}
+                href={`/journal/${post.slug}`}
                 className="group border-b border-white/10 py-4 last:border-b-0"
               >
                 <div className="flex flex-col justify-between gap-2 md:flex-row md:items-center">
@@ -68,4 +51,3 @@ export default function JournalPreview() {
     </section>
   );
 }
-
