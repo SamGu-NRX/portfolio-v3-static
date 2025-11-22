@@ -1,8 +1,14 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 import { useLenis } from "lenis/react";
 import Link from "next/link";
+import Lenis from "lenis";
 
 type SectionMetrics = {
   top: number;
@@ -15,8 +21,11 @@ export default function Navbar() {
 
   const hasSnappedRef = useRef(false);
   const lastIntentRef = useRef<number>(1);
+  const isProgrammaticScrollRef = useRef(false);
+  const lenisRef = useRef<Lenis | null>(null);
 
-   // Magnetic navigation motion values
+
+  // Magnetic navigation motion values
   const magneticX = useMotionValue(0);
   const magneticY = useMotionValue(0);
   const navX = useSpring(magneticX, {
@@ -29,9 +38,6 @@ export default function Navbar() {
     damping: 30,
     mass: 0.4,
   });
-
-  // Debug flag
-  const DEBUG = false;
 
   useEffect(() => {
     const footer = document.getElementById("contact");
@@ -51,14 +57,13 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", updateMetrics);
   }, []);
 
-  // Lightweight "magnetic" tracking – the center nav subtly follows the cursor
+  // Lightweight "magnetic" tracking
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
       const normalizedX = (event.clientX - innerWidth / 2) / innerWidth;
       const normalizedY = (event.clientY - innerHeight / 2) / innerHeight;
-
-      const maxOffset = 16; // max translation in px
+      const maxOffset = 16;
 
       magneticX.set(normalizedX * maxOffset);
       magneticY.set(normalizedY * maxOffset);
@@ -71,10 +76,10 @@ export default function Navbar() {
   useLenis(
     (lenis) => {
       if (!lenis) return;
+      lenisRef.current = lenis;
 
       const { scroll, direction, progress, velocity } = lenis;
 
-      // 0. TRACK INTENT
       if (direction !== 0) lastIntentRef.current = direction;
 
       // 1. HIDE HEADER LOGIC
@@ -88,71 +93,71 @@ export default function Navbar() {
         setHide((prev) => (prev !== shouldHide ? shouldHide : prev));
       }
 
-      // ---------------------------------------------------------
       // 2. CONTINUOUS MOMENTUM SNAP
-      // ---------------------------------------------------------
       const SNAP_START = 0.97;
       const ALREADY_THERE = 0.997;
-
-      // We raise the threshold significantly (from 1 to 4).
-      // This allows us to "catch" the scroll while it is still moving decently fast,
-      // avoiding the feeling that the site forces you to stop before snapping.
-      // However, we still ignore "violent" flicks (velocity > 4).
       const VELOCITY_THRESHOLD = 3.0;
 
       const inSnapZone = progress >= SNAP_START && progress < ALREADY_THERE;
       const isMovingDownOrStopped =
         direction === 1 || (direction === 0 && lastIntentRef.current === 1);
 
-      // "Coasting" means moving at a moderate speed or stopped.
       const isCoasting = Math.abs(velocity) < VELOCITY_THRESHOLD;
+
+      // Prevent auto-snap from fighting manual nav clicks
+      if (isProgrammaticScrollRef.current) {
+        return;
+      }
 
       if (inSnapZone && !hasSnappedRef.current && isMovingDownOrStopped) {
         if (isCoasting) {
-          if (DEBUG)
-            console.log(
-              `🧲 [Navbar] Coasting detected (${velocity.toFixed(2)}). Blending Snap.`,
-            );
-
           hasSnappedRef.current = true;
-
           lenis.scrollTo("bottom", {
-            // Duration: 1.2s is a sweet spot for "Expo" ease to feel expensive but not sluggish
             duration: 1.2,
             lock: true,
-
-            // CRITICAL CHANGE: EaseOutExpo
-            // 1. It starts FAST (matching your existing momentum).
-            // 2. It decelerates smoothly to the bottom.
-            // This avoids the "stop-then-start" jerkiness of EaseInOut curves.
-            easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -8 * t)),
-
-            onComplete: () => {
-              if (DEBUG) console.log("🏁 [Navbar] Snap Complete");
-            },
+            easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           });
-        } else {
-          // If velocity is HIGHER than 4, we assume you threw the scroll wheel hard.
-          // We do nothing and let your natural physics hit the bottom.
-          if (DEBUG && Math.random() > 0.9)
-            console.log(
-              `🏎️ [Navbar] High Momentum (${velocity.toFixed(2)}). Yielding.`,
-            );
         }
       }
 
-      // RESET: Only if user explicitly scrolls UP
       if (direction === -1 && hasSnappedRef.current) {
         hasSnappedRef.current = false;
       }
 
-      // SAFETY: If physics carried us to the bottom, lock the state.
       if (progress >= ALREADY_THERE && !hasSnappedRef.current) {
         hasSnappedRef.current = true;
       }
     },
     [ctaMetrics],
   );
+
+  const handleNavClick = (
+    event: ReactMouseEvent<HTMLAnchorElement>,
+    sectionId: string,
+  ) => {
+    const lenis = lenisRef.current;
+    const target = document.getElementById(sectionId);
+
+    if (!lenis || !target) return;
+
+    event.preventDefault();
+
+    // Flag strictly prevents the useLenis hook from interfering
+    isProgrammaticScrollRef.current = true;
+
+    lenis.scrollTo(target, {
+      // duration: 1.5 gives the exponential ease time to settle naturally
+      duration: 1.5,
+      // lock prevents user interaction from causing a "hard stop" mid-flight
+      lock: true,
+      force: true,
+      // Standard Lenis Ease: Math.min ensures we don't return > 1
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      onComplete: () => {
+        isProgrammaticScrollRef.current = false;
+      },
+    });
+  };
 
   return (
     <motion.nav
@@ -175,6 +180,7 @@ export default function Navbar() {
             key={item}
             href={`#${item.toLowerCase()}`}
             className="group relative overflow-hidden"
+            onClick={(event) => handleNavClick(event, item.toLowerCase())}
           >
             <span className="block transition-transform duration-300 ease-[0.76,0,0.24,1] group-hover:-translate-y-full">
               {item}
