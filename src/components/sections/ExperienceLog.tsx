@@ -37,7 +37,7 @@ export default function ExperienceLog() {
   return (
     <section
       ref={ref}
-      className="relative bg-neutral-950 px-6 py-32 text-foreground md:px-12"
+      className="text-foreground relative bg-neutral-950 px-6 py-32 md:px-12"
     >
       <div className="relative mx-auto max-w-5xl">
         <div className="mb-24 text-right">
@@ -50,15 +50,15 @@ export default function ExperienceLog() {
         <div className="relative space-y-24 border-l border-white/5 pl-8 md:pl-16">
           <motion.div
             style={{ height: lineHeight }}
-            className="absolute top-0 left-[-1px] z-10 w-[2px] origin-top bg-accent"
+            className="bg-accent absolute top-0 left-[-1px] z-10 w-[2px] origin-top"
           />
 
           {roles.map((role, index) => (
             <div key={role.company} className="group relative">
-              <div className="absolute top-2 -left-[39px] h-3 w-3 rounded-full border border-white/30 bg-background transition-all duration-300 group-hover:scale-150 group-hover:border-accent md:-left-[71px]" />
+              <div className="bg-background group-hover:border-accent absolute top-2 -left-[39px] h-3 w-3 rounded-full border border-white/30 transition-all duration-300 group-hover:scale-150 md:-left-[71px]" />
 
               <div className="mb-4 flex flex-col justify-between md:flex-row md:items-baseline">
-                <h3 className="font-serif text-3xl transition-colors duration-300 group-hover:text-accent md:text-4xl">
+                <h3 className="group-hover:text-accent font-serif text-3xl transition-colors duration-300 md:text-4xl">
                   {role.company}
                 </h3>
                 <span className="font-mono text-sm text-white/40">
@@ -67,7 +67,7 @@ export default function ExperienceLog() {
               </div>
 
               <div className="md:grid md:grid-cols-12 md:gap-8">
-                <div className="mb-2 font-mono text-xs uppercase tracking-widest text-accent md:col-span-3 md:mb-0">
+                <div className="text-accent mb-2 font-mono text-xs tracking-widest uppercase md:col-span-3 md:mb-0">
                   {role.role}
                 </div>
                 <div className="md:col-span-9">
@@ -93,4 +93,3 @@ export default function ExperienceLog() {
     </section>
   );
 }
-

@@ -38,10 +38,10 @@ export default function WorkTable() {
                 {project.title}
               </h3>
               <div className="mt-4 flex gap-12 md:mt-0">
-                <span className="font-sans font-light text-foreground/50 transition-colors group-hover:text-foreground">
+                <span className="text-foreground/50 group-hover:text-foreground font-sans font-light transition-colors">
                   {project.type}
                 </span>
-                <span className="font-mono text-sm text-foreground/30">
+                <span className="text-foreground/30 font-mono text-sm">
                   {project.year}
                 </span>
               </div>

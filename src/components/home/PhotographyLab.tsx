@@ -36,7 +36,7 @@ export default function PhotographyLab() {
                     fill
                     className="object-cover"
                   />
-                  <div className="pointer-events-none absolute inset-0 dust-overlay opacity-25 mix-blend-soft-light" />
+                  <div className="dust-overlay pointer-events-none absolute inset-0 opacity-25 mix-blend-soft-light" />
                 </div>
                 <div className="mt-4 flex justify-between font-mono text-[10px] tracking-widest text-white uppercase">
                   <span>Fuji Superia 400</span>

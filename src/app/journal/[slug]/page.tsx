@@ -20,23 +20,23 @@ export default async function JournalPostPage({
   }
 
   return (
-    <main className="min-h-screen bg-background px-6 pb-20 pt-32 md:px-12">
+    <main className="bg-background min-h-screen px-6 pt-32 pb-20 md:px-12">
       <div className="mx-auto max-w-3xl">
         <header className="mb-12 border-b border-white/10 pb-6">
           <Link
             href="/journal"
-            className="mb-6 inline-flex items-center font-mono text-[11px] uppercase tracking-widest text-white/50 transition-colors hover:text-accent"
+            className="hover:text-accent mb-6 inline-flex items-center font-mono text-[11px] tracking-widest text-white/50 uppercase transition-colors"
           >
             ← Back to journal
           </Link>
 
-          <span className="mb-3 block font-mono text-[10px] uppercase tracking-widest text-accent">
+          <span className="text-accent mb-3 block font-mono text-[10px] tracking-widest uppercase">
             {post.category}
           </span>
           <h1 className="font-serif text-4xl text-white md:text-5xl">
             {post.title}
           </h1>
-          <div className="mt-4 flex items-center gap-4 font-mono text-[11px] uppercase tracking-widest text-white/40">
+          <div className="mt-4 flex items-center gap-4 font-mono text-[11px] tracking-widest text-white/40 uppercase">
             <span>{post.date}</span>
             <span className="h-1 w-1 rounded-full bg-white/30" />
             <span>{post.readTime}</span>

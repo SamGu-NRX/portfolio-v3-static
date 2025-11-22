@@ -24,7 +24,6 @@ export default function Navbar() {
   const isProgrammaticScrollRef = useRef(false);
   const lenisRef = useRef<Lenis | null>(null);
 
-
   // Magnetic navigation motion values
   const magneticX = useMotionValue(0);
   const magneticY = useMotionValue(0);

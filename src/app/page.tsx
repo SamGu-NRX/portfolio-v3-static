@@ -10,7 +10,7 @@ import Footer from "@/components/home/Footer";
 
 export default function Home() {
   return (
-    <main className="relative w-full bg-background min-h-screen">
+    <main className="bg-background relative min-h-screen w-full">
       <Hero />
       <AboutTicker />
       <TechArsenal />

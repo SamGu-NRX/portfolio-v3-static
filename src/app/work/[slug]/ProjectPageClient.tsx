@@ -23,14 +23,18 @@ export default function ProjectPageClient({
   const textY = useTransform(scrollY, [0, 500], [0, 100]);
 
   return (
-    <main className="min-h-screen bg-background selection:bg-accent selection:text-white">
+    <main
+      className={`bg-background selection:bg-accent min-h-screen selection:text-white`}
+    >
       {/* Navigation Back */}
-      <nav className="fixed left-0 top-0 z-50 p-8 mix-blend-difference">
+      <nav className="fixed top-0 left-0 z-50 p-8 mix-blend-difference">
         <Link
           href="/"
-          className="group flex items-center gap-2 font-mono text-xs tracking-widest text-white transition-colors hover:text-accent"
+          className={`group hover:text-accent flex items-center gap-2 font-mono text-xs tracking-widest text-white transition-colors`}
         >
-          <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+          <ArrowLeft
+            className={`h-4 w-4 transition-transform group-hover:-translate-x-1`}
+          />
           RETURN TO TERMINAL
         </Link>
       </nav>
@@ -50,20 +54,30 @@ export default function ProjectPageClient({
           />
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+        <div
+          className={`from-background via-background/50 absolute inset-0 bg-gradient-to-t to-transparent`}
+        />
 
-        <div className="absolute bottom-0 left-0 z-10 w-full p-6 md:p-12">
+        <div className={`absolute bottom-0 left-0 z-10 w-full p-6 md:p-12`}>
           <motion.div style={{ y: textY }} className="mx-auto max-w-7xl">
-            <div className="mb-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <h1 className="font-serif text-[clamp(3rem,8vw,8rem)] leading-none text-white">
+            <div
+              className={`mb-8 flex flex-col justify-between gap-8 md:flex-row md:items-end`}
+            >
+              <h1
+                className={`font-serif text-[clamp(3rem,8vw,8rem)] leading-none text-white`}
+              >
                 {project.title}
               </h1>
-              <div className="flex gap-4 rounded-full border border-accent/30 px-4 py-2 font-mono text-xs text-accent">
+              <div
+                className={`border-accent/30 text-accent flex gap-4 rounded-full border px-4 py-2 font-mono text-xs`}
+              >
                 {project.year} — {project.role}
               </div>
             </div>
             <div className="mb-8 h-[1px] w-full bg-white/20" />
-            <div className="flex gap-6 font-mono text-xs uppercase tracking-widest text-white/60">
+            <div
+              className={`flex gap-6 font-mono text-xs tracking-widest text-white/60 uppercase`}
+            >
               {project.stack.map((tech) => (
                 <span key={tech}>{tech}</span>
               ))}
@@ -76,34 +90,46 @@ export default function ProjectPageClient({
       <div className="mx-auto max-w-4xl px-6 py-32">
         {/* The Challenge */}
         <div className="mb-32">
-          <h3 className="mb-8 font-mono text-xs text-accent">
+          <h3 className="text-accent mb-8 font-mono text-xs">
             (01) THE CHALLENGE
           </h3>
-          <TextReveal className="font-serif text-3xl leading-tight text-white/90 md:text-4xl">
+          <TextReveal
+            className={`font-serif text-3xl leading-tight text-white/90 md:text-4xl`}
+          >
             {project.challenge}
           </TextReveal>
         </div>
 
         {/* System Architecture Diagram (CSS Art) */}
-        <div className="relative mb-32 overflow-hidden border border-white/10 bg-white/[0.02] p-12">
+        <div
+          className={`relative mb-32 overflow-hidden border border-white/10 bg-white/[0.02] p-12`}
+        >
           <h3 className="mb-12 text-center font-mono text-xs text-white/40">
             SYSTEM ARCHITECTURE
           </h3>
 
-          <div className="flex items-center justify-center gap-12 text-center font-mono text-[10px] uppercase text-white/70 md:gap-24">
+          <div
+            className={`flex items-center justify-center gap-12 text-center font-mono text-[10px] text-white/70 uppercase md:gap-24`}
+          >
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-24 w-24 items-center justify-center rounded-full border border-accent bg-accent/10">
+              <div
+                className={`border-accent bg-accent/10 flex h-24 w-24 items-center justify-center rounded-full border`}
+              >
                 Client
               </div>
               <div className="h-12 w-px bg-white/20" />
             </div>
             <div className="mt-24 flex flex-col items-center gap-4">
-              <div className="flex h-32 w-32 items-center justify-center rounded-sm border border-white">
+              <div
+                className={`flex h-32 w-32 items-center justify-center rounded-sm border border-white`}
+              >
                 Load Balancer
               </div>
             </div>
             <div className="flex flex-col items-center gap-4">
-              <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-white/50">
+              <div
+                className={`flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-white/50`}
+              >
                 API Nodes
               </div>
               <div className="h-12 w-px bg-white/20" />
@@ -112,16 +138,18 @@ export default function ProjectPageClient({
 
           {/* Animated particles */}
           <div className="pointer-events-none absolute inset-0">
-            <div className="absolute left-1/4 top-1/2 h-2 w-2 animate-ping rounded-full bg-accent" />
+            <div
+              className={`bg-accent absolute top-1/2 left-1/4 h-2 w-2 animate-ping rounded-full`}
+            />
           </div>
         </div>
 
         {/* The Solution & Code */}
         <div className="mb-32">
-          <h3 className="mb-8 font-mono text-xs text-accent">(02) THE LOGIC</h3>
+          <h3 className="text-accent mb-8 font-mono text-xs">(02) THE LOGIC</h3>
           <RichMarkdown
             content={project.solution}
-            className="space-y-4 font-sans text-lg leading-relaxed text-white/70"
+            className={`space-y-4 font-sans text-lg leading-relaxed text-white/70`}
           />
           <ElegantCode
             highlightedHtml={highlightedSnippetHtml}
@@ -135,7 +163,9 @@ export default function ProjectPageClient({
             <span className="mb-2 block font-mono text-xs text-white/40">
               BACK TO INDEX
             </span>
-            <span className="font-serif text-4xl transition-colors group-hover:text-accent md:text-6xl">
+            <span
+              className={`group-hover:text-accent font-serif text-4xl transition-colors md:text-6xl`}
+            >
               Selected Works →
             </span>
           </Link>
@@ -146,4 +176,3 @@ export default function ProjectPageClient({
     </main>
   );
 }
-

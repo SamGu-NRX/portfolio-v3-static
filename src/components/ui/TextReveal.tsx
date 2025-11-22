@@ -15,10 +15,7 @@ export default function TextReveal({
   const words = children.split(" ");
 
   return (
-    <p
-      ref={ref}
-      className={`flex flex-wrap gap-x-2 gap-y-1 ${className}`}
-    >
+    <p ref={ref} className={`flex flex-wrap gap-x-2 gap-y-1 ${className}`}>
       {words.map((word, index) => (
         <span key={index} className="block overflow-hidden">
           <motion.span
@@ -38,4 +35,3 @@ export default function TextReveal({
     </p>
   );
 }
-

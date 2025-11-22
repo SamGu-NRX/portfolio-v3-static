@@ -80,7 +80,8 @@ impl EventStore for PostgresStore {
     stack: ["Next.js", "React", "TypeScript", "Framer Motion"],
     challenge:
       "Design a visually rich layout that could still hit strict performance budgets on low-end devices.",
-    solution: `
+    solution:
+      `
 The key was treating every animation as a *budgeted resource*.
 
 - All scroll-linked effects use a single shared **Lenis** smooth-scroll instance.
@@ -182,4 +183,3 @@ export const button = {
 export function getProjectBySlug(slug: string): ProjectCaseStudy | undefined {
   return projects.find((project) => project.slug === slug);
 }
-

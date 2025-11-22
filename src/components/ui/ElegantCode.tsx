@@ -20,7 +20,7 @@ export default function ElegantCode({
           <div className="h-2 w-2 rounded-full bg-white/20" />
           <div className="h-2 w-2 rounded-full bg-white/20" />
         </div>
-        <span className="font-mono text-[10px] uppercase tracking-widest text-white/30">
+        <span className="font-mono text-[10px] tracking-widest text-white/30 uppercase">
           {lang}
         </span>
       </div>
@@ -36,7 +36,7 @@ export default function ElegantCode({
           </pre>
         </div>
       )}
-      <div className="pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full bg-accent/10 blur-[100px]" />
+      <div className="bg-accent/10 pointer-events-none absolute -top-20 -right-20 h-64 w-64 rounded-full blur-[100px]" />
     </div>
   );
 }

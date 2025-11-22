@@ -35,11 +35,14 @@ export default function TechArsenal() {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <section className="relative overflow-hidden border-t border-white/10 bg-background px-6 py-32 md:px-12">
+    <section
+      className="bg-background relative overflow-hidden border-t border-white/10 px-6 py-32 md:px-12"
+      onMouseLeave={() => setHovered(null)}
+    >
       <div className="mx-auto max-w-7xl">
         <div className="mb-20">
           <h2 className="mb-4 font-serif text-5xl md:text-7xl">The Arsenal</h2>
-          <p className="font-mono text-sm uppercase tracking-widest text-accent">
+          <p className="text-accent font-mono text-sm tracking-widest uppercase">
             Tech Stack &amp; Tooling
           </p>
         </div>
@@ -55,13 +58,12 @@ export default function TechArsenal() {
                   <motion.span
                     key={skill}
                     onMouseEnter={() => setHovered(skill)}
-                    onMouseLeave={() => setHovered(null)}
                     animate={{
                       opacity: hovered ? (hovered === skill ? 1 : 0.2) : 1,
                       x: hovered === skill ? 10 : 0,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="cursor-pointer font-serif text-3xl transition-colors hover:text-accent md:text-4xl"
+                    className="hover:text-accent cursor-pointer font-serif text-3xl transition-colors md:text-4xl"
                   >
                     {skill}
                   </motion.span>
@@ -72,8 +74,7 @@ export default function TechArsenal() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-white/[0.02] blur-3xl" />
+      <div className="pointer-events-none absolute right-0 bottom-0 h-[500px] w-[500px] rounded-full bg-white/[0.02] blur-3xl" />
     </section>
   );
 }
-

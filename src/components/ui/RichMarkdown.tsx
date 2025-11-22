@@ -10,7 +10,10 @@ interface RichMarkdownProps {
   className?: string;
 }
 
-export default function RichMarkdown({ content, className }: RichMarkdownProps) {
+export default function RichMarkdown({
+  content,
+  className,
+}: RichMarkdownProps) {
   return (
     <div className={className}>
       <ReactMarkdown
@@ -25,24 +28,21 @@ export default function RichMarkdown({ content, className }: RichMarkdownProps) 
           ),
           h2: ({ ...props }) => (
             <h2
-              className="mb-4 mt-8 font-serif text-3xl text-white/90 md:text-4xl"
+              className="mt-8 mb-4 font-serif text-3xl text-white/90 md:text-4xl"
               {...props}
             />
           ),
           h3: ({ ...props }) => (
             <h3
-              className="mb-3 mt-6 font-serif text-2xl text-white/90 md:text-3xl"
+              className="mt-6 mb-3 font-serif text-2xl text-white/90 md:text-3xl"
               {...props}
             />
           ),
           p: ({ ...props }) => (
-            <p className="text-white/80 leading-relaxed" {...props} />
+            <p className="leading-relaxed text-white/80" {...props} />
           ),
           ul: ({ ...props }) => (
-            <ul
-              className="ml-5 list-disc space-y-2 text-white/80"
-              {...props}
-            />
+            <ul className="ml-5 list-disc space-y-2 text-white/80" {...props} />
           ),
           ol: ({ ...props }) => (
             <ol
@@ -53,7 +53,7 @@ export default function RichMarkdown({ content, className }: RichMarkdownProps) 
           li: ({ ...props }) => <li {...props} />,
           a: ({ ...props }) => (
             <a
-              className="underline decoration-accent/60 underline-offset-4 hover:text-accent"
+              className="decoration-accent/60 hover:text-accent underline underline-offset-4"
               {...props}
             />
           ),
@@ -73,7 +73,7 @@ export default function RichMarkdown({ content, className }: RichMarkdownProps) 
             if (inline || !languageMatch) {
               return (
                 <code
-                  className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[0.85em] text-accent"
+                  className="text-accent rounded bg-white/10 px-1.5 py-0.5 font-mono text-[0.85em]"
                   {...props}
                 >
                   {children}

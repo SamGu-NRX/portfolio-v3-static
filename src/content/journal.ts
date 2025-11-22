@@ -63,8 +63,10 @@ The key is that the *costs* $c_{FN}, c_{FP}$ must be negotiated with the people 
     date: "OCT 2024",
     readTime: "8 MIN",
     category: "ENGINEERING",
-    summary: "Latency budgets, ownership, and the joy of zero-cost abstractions.",
-    content: `
+    summary:
+      "Latency budgets, ownership, and the joy of zero-cost abstractions.",
+    content:
+      `
 There's a moment when your backend stops being \"just another API\" and starts to feel like **infrastructure**.
 
 For that layer, Rust brings a few superpowers:
@@ -87,8 +89,12 @@ Rust forces you to make that cost explicit, which is exactly what I want at the 
 
 In practice, this looked like:
 
-- Using ` + "`tokio`" + ` for async orchestration.
-- Leaning on ` + "`sqlx`" + ` for compile-time query checking.
+- Using ` +
+      "`tokio`" +
+      ` for async orchestration.
+- Leaning on ` +
+      "`sqlx`" +
+      ` for compile-time query checking.
 - Building small, composable crates instead of a monolith service.
     `.trim(),
   },
@@ -158,4 +164,3 @@ That one change alone can turn a 7-minute build into a 40-second one in CI.
 export function getJournalPostBySlug(slug: string): JournalPost | undefined {
   return journalPosts.find((post) => post.slug === slug);
 }
-
