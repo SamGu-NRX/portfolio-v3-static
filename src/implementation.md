@@ -154,7 +154,7 @@ _Why:_ Standard navbars are boring. This one tracks the mouse slightly and feels
 
 ```tsx
 "use client";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -163,7 +163,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-      className="fixed left-0 top-0 z-50 flex w-full items-start justify-between px-8 py-6 text-white mix-blend-difference"
+      className="fixed top-0 left-0 z-50 flex w-full items-start justify-between px-8 py-6 text-white mix-blend-difference"
     >
       <div className="flex flex-col">
         <span className="font-serif text-xl tracking-tight">ATLAS</span>
@@ -180,7 +180,7 @@ export default function Navbar() {
             <span className="block transition-transform duration-300 ease-[0.76,0,0.24,1] group-hover:-translate-y-full">
               {item}
             </span>
-            <span className="text-accent absolute left-0 top-0 block translate-y-full transition-transform duration-300 ease-[0.76,0,0.24,1] group-hover:translate-y-0">
+            <span className="text-accent absolute top-0 left-0 block translate-y-full transition-transform duration-300 ease-[0.76,0,0.24,1] group-hover:translate-y-0">
               {item}
             </span>
           </Link>
@@ -205,7 +205,7 @@ _Why:_ It replaces the standard pointer with a blend-mode circle that expands wh
 ```tsx
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function CustomCursor() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -220,7 +220,7 @@ export default function CustomCursor() {
 
   return (
     <motion.div
-      className="pointer-events-none fixed left-0 top-0 z-[9999] h-4 w-4 rounded-full bg-white mix-blend-difference"
+      className="pointer-events-none fixed top-0 left-0 z-[9999] h-4 w-4 rounded-full bg-white mix-blend-difference"
       animate={{ x: mousePos.x - 8, y: mousePos.y - 8 }}
       transition={{ type: "tween", ease: "backOut", duration: 0.1 }}
     />
@@ -239,7 +239,7 @@ This page orchestrates the story. It's broken into three key "acts": The Stateme
 ```tsx
 "use client";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 
 // Helper animation variants
@@ -311,7 +311,7 @@ function AboutTicker() {
           {[1, 2, 3, 4].map((key) => (
             <h2
               key={key}
-              className="cursor-default font-serif text-[6vw] italic text-white opacity-30 transition-opacity duration-500 hover:opacity-100"
+              className="cursor-default font-serif text-[6vw] text-white italic opacity-30 transition-opacity duration-500 hover:opacity-100"
             >
               Designing with logic — Building with emotion —
             </h2>
@@ -389,7 +389,7 @@ function PhotographyLab() {
       className="text-background relative h-[300vh] bg-[#EAE9E5]"
     >
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <div className="absolute left-12 top-12 z-10 mix-blend-multiply">
+        <div className="absolute top-12 left-12 z-10 mix-blend-multiply">
           <h2 className="text-accent font-serif text-6xl md:text-8xl">
             The Darkroom
           </h2>
@@ -416,7 +416,7 @@ function PhotographyLab() {
                 {/* Film Dust Overlay */}
                 <div className="pointer-events-none absolute inset-0 bg-[url('/dust-overlay.png')] opacity-20"></div>
               </div>
-              <div className="mt-4 flex justify-between font-mono text-[10px] uppercase tracking-widest text-white">
+              <div className="mt-4 flex justify-between font-mono text-[10px] tracking-widest text-white uppercase">
                 <span>Fuji Superia 400</span>
                 <span>Tokyo, JP</span>
               </div>
@@ -475,7 +475,7 @@ function Footer() {
 ### How to Launch This
 
 1.  Run `npx create-next-app@latest`
-2.  Install: `npm i framer-motion @studio-freight/lenis clsx tailwind-merge`
+2.  Install: `npm i motion/react @studio-freight/lenis clsx tailwind-merge`
 3.  Copy the files exactly as structured above.
 4.  Find a nice `noise.svg` or use the data-uri provided in the CSS.
 5.  Replace the font imports with actual Google Font imports or local font files.

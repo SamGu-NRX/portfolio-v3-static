@@ -42,7 +42,7 @@ A dark, immersive theme that avoids "Pitch Black" in favor of deep organic tones
 
 ```bash
 npx create-next-app@latest portfolio --typescript --tailwind --eslint
-npm install framer-motion @studio-freight/lenis clsx tailwind-merge lucide-react
+npm install motion/react @studio-freight/lenis clsx tailwind-merge lucide-react
 ```
 
 ### **Step 2: Tailwind Configuration (`tailwind.config.ts`)**
@@ -159,17 +159,17 @@ export default function SmoothScroll({
 
 ### **2. Hero Section: "Kinetic Typography"**
 
-_Rationale:_ Instead of a photo of you, we use language as texture. The text reveals the duality of the persona. We use `framer-motion` for a staggered reveal.
+_Rationale:_ Instead of a photo of you, we use language as texture. The text reveals the duality of the persona. We use `motion/react` for a staggered reveal.
 
 ```tsx
 "use client";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 export default function Hero() {
   return (
     <section className="relative flex h-screen w-full flex-col justify-center overflow-hidden px-6 md:px-12">
       {/* Background Abstract Gradient - Adds Depth */}
-      <div className="bg-clay/10 absolute right-[-10%] top-[-20%] h-[600px] w-[600px] rounded-full blur-[120px]" />
+      <div className="bg-clay/10 absolute top-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full blur-[120px]" />
 
       <div className="z-10 mx-auto w-full max-w-7xl">
         <motion.div
@@ -179,7 +179,7 @@ export default function Hero() {
           className="mb-8 flex items-center gap-4"
         >
           <div className="bg-clay h-[1px] w-12" />
-          <span className="text-clay font-mono text-sm uppercase tracking-widest">
+          <span className="text-clay font-mono text-sm tracking-widest uppercase">
             Fullstack Design Engineer
           </span>
         </motion.div>
@@ -195,7 +195,7 @@ export default function Hero() {
                 ease: [0.16, 1, 0.3, 1],
                 delay: i * 0.15,
               }}
-              className="overflow-hidden font-serif text-[clamp(3rem,10vw,9rem)] font-light leading-[0.85] tracking-tight"
+              className="overflow-hidden font-serif text-[clamp(3rem,10vw,9rem)] leading-[0.85] font-light tracking-tight"
             >
               <span className="block">{word}</span>
             </motion.h1>
@@ -232,7 +232,7 @@ _Rationale:_ Cards are generic. We will use a "List View" that feels like a tabl
 ```tsx
 "use client";
 import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 
 const projects = [
@@ -323,7 +323,7 @@ export default function WorkTable() {
               damping: 15,
               mass: 0.5,
             }}
-            className="pointer-events-none fixed left-0 top-0 z-40 hidden h-[300px] w-[400px] overflow-hidden rounded-sm md:block"
+            className="pointer-events-none fixed top-0 left-0 z-40 hidden h-[300px] w-[400px] overflow-hidden rounded-sm md:block"
           >
             {/*
               Note: In a real app, use Next/Image with object-cover.
@@ -347,7 +347,7 @@ _Rationale:_ Photography is the hobby, so it shouldn't look like the code work. 
 
 ```tsx
 "use client";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useRef } from "react";
 
 const photos = [
@@ -394,7 +394,7 @@ export default function PhotographySection() {
               <div className="absolute inset-0 bg-gradient-to-tr from-black to-neutral-700 opacity-60"></div>
             </div>
             <div className="mt-2 flex h-8 items-end justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-black/60">
+              <span className="font-mono text-[10px] tracking-widest text-black/60 uppercase">
                 Kodak Portra 400
               </span>
               <span className="font-mono text-[10px] text-black/60">2024</span>
