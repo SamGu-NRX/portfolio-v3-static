@@ -4,13 +4,16 @@ import { getJournalPostBySlug } from "@/content/journal";
 import RichMarkdown from "@/components/ui/RichMarkdown";
 
 interface JournalPostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
-export default function JournalPostPage({ params }: JournalPostPageProps) {
-  const post = getJournalPostBySlug(params.slug);
+export default async function JournalPostPage({
+  params,
+}: JournalPostPageProps) {
+  const { slug } = await params;
+  const post = getJournalPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -47,4 +50,3 @@ export default function JournalPostPage({ params }: JournalPostPageProps) {
     </main>
   );
 }
-

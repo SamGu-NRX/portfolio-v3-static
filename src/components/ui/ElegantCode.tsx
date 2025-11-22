@@ -26,7 +26,7 @@ export default function ElegantCode({
       </div>
       {highlightedHtml ? (
         <div
-          className="overflow-x-auto p-6 [&_pre]:m-0 [&_pre]:bg-transparent [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed"
+          className="overflow-x-auto p-6 [&_pre]:m-0 [&_pre]:!bg-transparent [&_pre]:font-mono [&_pre]:text-sm [&_pre]:leading-relaxed"
           dangerouslySetInnerHTML={{ __html: highlightedHtml }}
         />
       ) : (

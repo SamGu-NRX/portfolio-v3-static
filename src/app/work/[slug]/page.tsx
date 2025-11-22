@@ -4,13 +4,14 @@ import ProjectPageClient from "./ProjectPageClient";
 import { getProjectBySlug } from "@/content/projects";
 
 interface ProjectPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -38,4 +39,3 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     />
   );
 }
-
