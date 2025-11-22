@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import Link from "next/link";
 
 const projects = [
   {
@@ -9,24 +10,28 @@ const projects = [
     type: "Backend Architecture",
     year: "2024",
     img: "https://picsum.photos/800/1200?random=1",
+    slug: "chronicle-api",
   },
   {
     title: "Vogue Scandinavia",
     type: "Frontend Experience",
     year: "2023",
     img: "https://picsum.photos/800/1200?random=2",
+    slug: "vogue-scandinavia",
   },
   {
     title: "Lumina Health",
     type: "Fullstack Application",
     year: "2023",
     img: "https://picsum.photos/800/1200?random=3",
+    slug: "lumina-health",
   },
   {
     title: "Apex Finance",
     type: "Design System",
     year: "2022",
     img: "https://picsum.photos/800/1200?random=4",
+    slug: "apex-finance",
   },
 ];
 
@@ -52,8 +57,9 @@ export default function WorkTable() {
 
         <div className="flex flex-col">
           {projects.map((project, index) => (
-            <div
-              key={index}
+            <Link
+              key={project.slug}
+              href={`/work/${project.slug}`}
               onMouseEnter={() => setActiveProject(index)}
               onMouseLeave={() => setActiveProject(null)}
               className="group flex cursor-pointer flex-col items-baseline justify-between border-b border-white/10 py-12 transition-all duration-500 hover:border-white/30 md:flex-row"
@@ -62,14 +68,14 @@ export default function WorkTable() {
                 {project.title}
               </h3>
               <div className="mt-4 flex gap-12 md:mt-0">
-                <span className="text-foreground/50 group-hover:text-foreground font-sans font-light transition-colors">
+                <span className="font-sans font-light text-foreground/50 transition-colors group-hover:text-foreground">
                   {project.type}
                 </span>
-                <span className="text-foreground/30 font-mono text-sm">
+                <span className="font-mono text-sm text-foreground/30">
                   {project.year}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
