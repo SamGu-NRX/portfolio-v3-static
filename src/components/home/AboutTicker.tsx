@@ -3,7 +3,10 @@ import { motion } from "motion/react";
 
 export default function AboutTicker() {
   return (
-    <section className="bg-muted/5 w-full overflow-hidden border-y border-white/10 py-32">
+    <section
+      id="about"
+      className="bg-muted/5 w-full overflow-hidden border-y border-white/10 py-32"
+    >
       <div className="flex gap-12 whitespace-nowrap">
         <motion.div
           animate={{ x: "-50%" }}

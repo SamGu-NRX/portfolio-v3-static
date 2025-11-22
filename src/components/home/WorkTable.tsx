@@ -40,6 +40,7 @@ export default function WorkTable() {
 
   return (
     <section
+      id="work"
       className="relative border-t border-white/5 px-6 py-32 md:px-12"
       onMouseMove={handleMouseMove}
     >

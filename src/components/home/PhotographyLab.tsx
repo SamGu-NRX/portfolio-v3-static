@@ -9,7 +9,7 @@ export default function PhotographyLab() {
   const x = useTransform(scrollYProgress, [0, 1], ["1%", "-55%"]);
 
   return (
-    <section className="text-background relative bg-[#EAE9E5]">
+    <section id="lab" className="text-background relative bg-[#EAE9E5]">
       <div ref={targetRef} className="h-[300vh]">
         <div className="sticky top-0 flex h-screen items-center overflow-hidden">
           <div className="absolute top-12 left-12 z-10 py-10 mix-blend-multiply">
@@ -36,6 +36,7 @@ export default function PhotographyLab() {
                     fill
                     className="object-cover"
                   />
+                  <div className="pointer-events-none absolute inset-0 dust-overlay opacity-25 mix-blend-soft-light" />
                 </div>
                 <div className="mt-4 flex justify-between font-mono text-[10px] tracking-widest text-white uppercase">
                   <span>Fuji Superia 400</span>

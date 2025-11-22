@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { useLenis } from "lenis/react";
 import Link from "next/link";
 
@@ -15,6 +15,20 @@ export default function Navbar() {
 
   const hasSnappedRef = useRef(false);
   const lastIntentRef = useRef<number>(1);
+
+   // Magnetic navigation motion values
+  const magneticX = useMotionValue(0);
+  const magneticY = useMotionValue(0);
+  const navX = useSpring(magneticX, {
+    stiffness: 260,
+    damping: 30,
+    mass: 0.4,
+  });
+  const navY = useSpring(magneticY, {
+    stiffness: 260,
+    damping: 30,
+    mass: 0.4,
+  });
 
   // Debug flag
   const DEBUG = false;
@@ -36,6 +50,23 @@ export default function Navbar() {
     window.addEventListener("resize", updateMetrics);
     return () => window.removeEventListener("resize", updateMetrics);
   }, []);
+
+  // Lightweight "magnetic" tracking – the center nav subtly follows the cursor
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const normalizedX = (event.clientX - innerWidth / 2) / innerWidth;
+      const normalizedY = (event.clientY - innerHeight / 2) / innerHeight;
+
+      const maxOffset = 16; // max translation in px
+
+      magneticX.set(normalizedX * maxOffset);
+      magneticY.set(normalizedY * maxOffset);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [magneticX, magneticY]);
 
   useLenis(
     (lenis) => {
@@ -135,7 +166,10 @@ export default function Navbar() {
         <span className="font-mono text-[10px] opacity-60">EST. 1998</span>
       </div>
 
-      <div className="hidden gap-8 font-mono text-xs tracking-widest md:flex">
+      <motion.div
+        className="hidden gap-8 font-mono text-xs tracking-widest md:flex"
+        style={{ x: navX, y: navY }}
+      >
         {["WORK", "LAB", "ABOUT", "CONTACT"].map((item) => (
           <Link
             key={item}
@@ -150,7 +184,7 @@ export default function Navbar() {
             </span>
           </Link>
         ))}
-      </div>
+      </motion.div>
 
       <div className="text-right font-mono text-xs">
         <span className="text-accent block animate-pulse">● AVAILABLE</span>
