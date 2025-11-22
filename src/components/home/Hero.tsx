@@ -6,7 +6,11 @@ const wordAnimation = {
   hidden: { y: "100%" },
   visible: (i: number) => ({
     y: "0%",
-    transition: { delay: i * 0.1, duration: 1, ease: [0.76, 0, 0.24, 1] },
+    transition: {
+      delay: i * 0.1,
+      duration: 1,
+      ease: [0.76, 0, 0.24, 1] as [number, number, number, number],
+    },
   }),
 };
 
